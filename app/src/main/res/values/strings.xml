@@ -12,4 +12,10 @@
     <string name="contents">내용</string>
     <string name="check">확인</string>
     <string name="explain">설명</string>
+    <string name="delete">삭제</string>
+    <string name="back">돌아가기</string>
+    <string name="AddEpisode">에피소드 추가</string>
+    <string name="yes">네</string>
+    <string name="no">아니오</string>
+    <string name="savemoment">임시 저장하고 나가시겠습니까?</string>
 </resources>

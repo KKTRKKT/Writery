@@ -20,7 +20,9 @@
             android:background="@drawable/border"
             android:backgroundTint="@color/design_default_color_primary"
             app:rippleColor="@color/design_default_color_primary_dark"/>
+
         <android.support.design.button.MaterialButton
+            android:id="@+id/erase"
             app:cornerRadius="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
@@ -28,8 +30,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/erase"
+            android:onClick="erase"
             android:backgroundTint="@color/design_default_color_primary"
             app:rippleColor="@color/design_default_color_primary_dark"/>
+
         <View
             android:background="#00FFFFFF"
             android:layout_width="wrap_content"
@@ -37,31 +41,51 @@
             android:layout_weight="0.3"/>
 
         <android.support.design.button.MaterialButton
+            android:id="@+id/save"
             android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
             app:cornerRadius="10dp"
             android:background="@drawable/border"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="save"
             android:text="@string/save"
             android:backgroundTint="@color/design_default_color_primary"
             app:rippleColor="@color/design_default_color_primary_dark"/>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#000000"/>
+
     <EditText
+        android:id="@+id/on_write_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
+        android:background="#00FFFFFF"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
         android:layout_marginStart="30dp"
-        android:padding="15dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:gravity="center"
         android:textSize="20sp"
         android:hint="@string/title"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#000000"/>
+
     <EditText
+        android:id="@+id/on_write_contents"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="15dp"
         android:gravity="top|start"
         android:textSize="20sp"
+        android:background="@android:color/white"
         android:hint="@string/contents"/>
 
 </LinearLayout>

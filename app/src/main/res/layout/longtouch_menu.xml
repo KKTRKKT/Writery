@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ll_writeChoice"
     android:orientation="vertical">
 
@@ -23,14 +24,17 @@
             android:layout_width="0dp"
             android:layout_weight="3.3"
             android:paddingTop="10dp"
-            android:paddingLeft="20dp"
+            android:paddingStart="20dp"
             android:paddingBottom="10dp">
             <android.support.design.button.MaterialButton
+                android:textSize="40sp"
+                android:text="@string/modify"
+                app:cornerRadius="10dp"
                 android:id="@+id/btn_userWrite"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
-                android:background="@drawable/btn_user_write"/>
+                android:backgroundTint="@color/design_default_color_primary" />
         </LinearLayout>
 
         <LinearLayout
@@ -39,11 +43,14 @@
             android:layout_weight="3.3"
             android:padding="10dp">
             <android.support.design.button.MaterialButton
+                android:textSize="40sp"
+                android:text="@string/delete"
+                android:backgroundTint="@color/design_default_color_primary"
+                app:cornerRadius="10dp"
                 android:id="@+id/btn_waterWrite"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:background="@drawable/btn_no_smoking_write"/>
+                android:layout_weight="0.5" />
         </LinearLayout>
     </LinearLayout>
 

@@ -1,12 +1,24 @@
 package com.example.writery;
 
-public class WriteItem {
-    public String title;
-    public String contents;
+import java.util.ArrayList;
 
-    public WriteItem(String title, String content) {
+public class WriteItem {
+    String title;
+    String info;
+    int image;
+    ArrayList<EpisodeItem> episodeItem;
+
+    public WriteItem(String title, String info, int image, ArrayList<EpisodeItem> episodeItem) {
         this.title = title;
-        this.contents = content;
+        this.info = info;
+        this.image = image;
+        this.episodeItem = episodeItem;
+    }
+
+    public WriteItem(String title, String info, int image){
+        this.title = title;
+        this.info = info;
+        this.image = image;
     }
 
 }

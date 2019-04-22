@@ -13,7 +13,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/write_title"
+            android:id="@+id/cardview_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.8"
@@ -25,6 +25,7 @@
             tools:ignore="RtlSymmetry"/>
 
         <android.support.design.button.MaterialButton
+            android:id="@+id/modify_button"
             app:cornerRadius="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -1,15 +1,16 @@
 package com.example.writery;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.TextView;
 
-public class SaveMomentDialog {
-    public WriteContent context;
+public class CreateWriteDialog {
+    public MainActivity context;
 
-    public SaveMomentDialog(WriteContent context){
+    public CreateWriteDialog(MainActivity context){
         this.context = context;
     }
     public void callFunction() {
@@ -27,24 +28,26 @@ public class SaveMomentDialog {
         dlg.show();
 
         // 커스텀 다이얼로그의 각 위젯들을 정의한다.
-        final Button okButton = (Button) dlg.findViewById(R.id.okButton);
-        final Button cancelButton = (Button) dlg.findViewById(R.id.cancelButton);
+        final TextView title = dlg.findViewById(R.id.dlg_title);
+        final Button yesButton = (Button) dlg.findViewById(R.id.okButton);
+        final Button noButton = (Button) dlg.findViewById(R.id.cancelButton);
 
-        okButton.setOnClickListener(new View.OnClickListener() {
+        title.setText("새로운 소설을 생성하시겠습니까?");
+
+        yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "임시 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                context.list.add(new nobelItem());
+                Intent intent = new Intent(context, WriteActivity.class);
+                view.getContext().startActivity(intent);
                 dlg.dismiss();
-                context.back();
             }
         });
-        cancelButton.setOnClickListener(new View.OnClickListener() {
+        noButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dlg.dismiss();
-                context.back();
             }
         });
     }
-
 }

@@ -1,5 +1,6 @@
 package com.example.writery;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,17 +12,47 @@ import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
 
-    private final ArrayList<ImageView> list;
+    private final ArrayList<nobelItem> list;
 
-    RecyclerViewAdapter(ArrayList<ImageView> list) { this.list = list;}
+    RecyclerViewAdapter(ArrayList<nobelItem> list) { this.list = list;}
 
     class MyViewHolder extends RecyclerView.ViewHolder{
-
-        ImageView image;
+        ImageView image ;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            image = itemView.findViewById(R.id.card_view_image);
+            int position = getAdapterPosition();
+            image = itemView.findViewById(list.get(position).getImage());
+
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    MainActivity mainActivity = (MainActivity) view.getContext();
+                    ModifyAndDeleteDialog modifyAndDeleteDialog = new ModifyAndDeleteDialog(mainActivity);
+                    modifyAndDeleteDialog.callFunction();
+                    return true;
+                }
+            });
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    Intent intent = new Intent(view.getContext(), WriteActivity.class);
+                    intent.putExtra("title", list.get(position).writeItem.get(position).title);
+                    intent.putExtra("info", list.get(position).writeItem.get(position).info);
+                    intent.putExtra("image", list.get(position).writeItem.get(position).image);
+                    String[] contents = new String[70];
+                    String[] episodeTitle = new String[70];
+                    for(int i = 0; list.get(position).writeItem.get(position).episodeItem.get(i) != null; i++) {
+                        contents[i] = list.get(position).writeItem.get(position).episodeItem.get(i).contents;
+                        episodeTitle[i] = list.get(position).writeItem.get(position).episodeItem.get(i).episodeTitle;
+                    }
+                    intent.putExtra("contents", contents);
+                    intent.putExtra("episodeTitle", episodeTitle);
+                    view.getContext().startActivity(intent);
+                }
+            });
     }
 }
 
@@ -34,7 +65,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        holder.image.setImageResource(list.get(position).getImage());
     }
 
     @Override

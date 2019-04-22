@@ -1,62 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ll_writeChoice"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4">
+    <android.support.design.button.MaterialButton
+        android:id="@+id/modify_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFD600"
+        app:rippleColor="#FF6D00"
+        android:text="@string/modify"
+        android:textSize="40sp"
+        android:layout_margin="15dp"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/del_btn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="0dp"
-        android:layout_weight="2">
-
-        <LinearLayout
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="3.3"
-            android:paddingTop="10dp"
-            android:paddingStart="20dp"
-            android:paddingBottom="10dp">
-            <android.support.design.button.MaterialButton
-                android:textSize="40sp"
-                android:text="@string/modify"
-                app:cornerRadius="10dp"
-                android:id="@+id/btn_userWrite"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:backgroundTint="@color/design_default_color_primary" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="3.3"
-            android:padding="10dp">
-            <android.support.design.button.MaterialButton
-                android:textSize="40sp"
-                android:text="@string/delete"
-                android:backgroundTint="@color/design_default_color_primary"
-                app:cornerRadius="10dp"
-                android:id="@+id/btn_waterWrite"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4">
-    </LinearLayout>
-</LinearLayout>
+    <android.support.design.button.MaterialButton
+        android:id="@+id/del_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:backgroundTint="#FFD600"
+        app:rippleColor="#FF6D00"
+        android:text="@string/delete"
+        android:textSize="40sp"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/modify_btn"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>

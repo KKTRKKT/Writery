@@ -8,12 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    private ArrayList<ImageView> list = new ArrayList<ImageView>();
+    public ArrayList<nobelItem> list = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
         fad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToWrite();
+                CreateWriteDialog createWriteDialog = new CreateWriteDialog((MainActivity)view.getContext());
+                createWriteDialog.callFunction();
             }
         });
 
@@ -39,5 +39,16 @@ public class MainActivity extends AppCompatActivity {
     private void goToWrite(){
         Intent intent = new Intent(this, WriteActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        BackCloseHandler backCloseHandler = new BackCloseHandler(this);
+        backCloseHandler.onBackPressed();
+        //super.onBackPressed();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     }
 }

@@ -10,20 +10,31 @@ import android.widget.EditText;
 public class WriteContent extends Activity {
     MaterialButton Save;
     EditText contents;
+    EditText title;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.on_wirte_layout);
 
+        Bundle extras = getIntent().getExtras();
+        if(extras == null){
+            return;
+        }
+
         Save = findViewById(R.id.save);
         contents = findViewById(R.id.on_write_contents);
+        title = findViewById(R.id.on_write_title);
+
+        title.setText(extras.getString("title"));
+        contents.setText(extras.getString("contents"));
     }
 
 
     @Override
     public void onBackPressed() {
-
+        SaveMomentDialog customDialog = new SaveMomentDialog(WriteContent.this);
+        customDialog.callFunction();
     }
 
     public void back(){
@@ -35,12 +46,6 @@ public class WriteContent extends Activity {
     }
 
     public void save(View view) {
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // 커스텀 다이얼로그를 생성한다. 사용자가 만든 클래스이다.
-                SaveMomentDialog customDialog = new SaveMomentDialog(WriteContent.this);
-            }
-        });
+        back();
     }
 }

@@ -4,12 +4,11 @@ import android.app.Dialog;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.Toast;
 
-public class SaveMomentDialog {
-    public WriteContent context;
+public class ModifyAndDeleteDialog {
+    public MainActivity context;
 
-    public SaveMomentDialog(WriteContent context){
+    public ModifyAndDeleteDialog(MainActivity context){
         this.context = context;
     }
     public void callFunction() {
@@ -21,30 +20,26 @@ public class SaveMomentDialog {
         dlg.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         // 커스텀 다이얼로그의 레이아웃을 설정한다.
-        dlg.setContentView(R.layout.custom_alterdialog);
+        dlg.setContentView(R.layout.longtouch_menu);
 
         // 커스텀 다이얼로그를 노출한다.
         dlg.show();
 
         // 커스텀 다이얼로그의 각 위젯들을 정의한다.
-        final Button okButton = (Button) dlg.findViewById(R.id.okButton);
-        final Button cancelButton = (Button) dlg.findViewById(R.id.cancelButton);
+        final Button modifyButton = (Button) dlg.findViewById(R.id.modify_btn);
+        final Button delButton = (Button) dlg.findViewById(R.id.del_btn);
 
-        okButton.setOnClickListener(new View.OnClickListener() {
+        modifyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "임시 저장되었습니다.", Toast.LENGTH_SHORT).show();
                 dlg.dismiss();
-                context.back();
             }
         });
-        cancelButton.setOnClickListener(new View.OnClickListener() {
+        delButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dlg.dismiss();
-                context.back();
             }
         });
     }
-
 }

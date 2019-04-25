@@ -29,8 +29,8 @@ public class writeRecyclerViewAdpater extends RecyclerView.Adapter<RecyclerView.
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     Intent intent = new Intent(v.getContext(), WriteContent.class);
-                    String title = writeArrayList.get(position).episodeTitle;
-                    String contents = writeArrayList.get(position).contents;
+                    String title = writeArrayList.get(position).getEpisodeTitle();
+                    String contents = writeArrayList.get(position).getContents();
                     intent.putExtra("title", title);
                     intent.putExtra("contents", contents);
                     v.getContext().startActivity(intent);
@@ -39,8 +39,8 @@ public class writeRecyclerViewAdpater extends RecyclerView.Adapter<RecyclerView.
         }
     }
 
-    private ArrayList<EpisodeItem> writeArrayList;
-    writeRecyclerViewAdpater(ArrayList<EpisodeItem> writeArrayList){
+    private ArrayList<WriteItem> writeArrayList;
+    writeRecyclerViewAdpater(ArrayList<WriteItem> writeArrayList){
         this.writeArrayList = writeArrayList;
     }
 
@@ -54,7 +54,7 @@ public class writeRecyclerViewAdpater extends RecyclerView.Adapter<RecyclerView.
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         ViewHolder viewHolder1 = (ViewHolder)viewHolder;
-        viewHolder1.title.setText(writeArrayList.get(i).episodeTitle);
+        viewHolder1.title.setText(writeArrayList.get(i).getEpisodeTitle());
     }
 
     @Override

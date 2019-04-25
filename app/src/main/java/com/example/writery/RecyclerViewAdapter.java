@@ -12,9 +12,9 @@ import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
 
-    private final ArrayList<nobelItem> list;
+    private final ArrayList<NobelItem> list;
 
-    RecyclerViewAdapter(ArrayList<nobelItem> list) { this.list = list;}
+    RecyclerViewAdapter(ArrayList<NobelItem> list) { this.list = list;}
 
     class MyViewHolder extends RecyclerView.ViewHolder{
         ImageView image ;
@@ -39,14 +39,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 public void onClick(View view) {
                     int position = getAdapterPosition();
                     Intent intent = new Intent(view.getContext(), WriteActivity.class);
-                    intent.putExtra("title", list.get(position).writeItem.get(position).title);
-                    intent.putExtra("info", list.get(position).writeItem.get(position).info);
-                    intent.putExtra("image", list.get(position).writeItem.get(position).image);
+                    intent.putExtra("title", list.get(position).getTitle());
+                    intent.putExtra("info", list.get(position).getInfo());
+                    intent.putExtra("image", list.get(position).getImage());
                     String[] contents = new String[70];
                     String[] episodeTitle = new String[70];
-                    for(int i = 0; list.get(position).writeItem.get(position).episodeItem.get(i) != null; i++) {
-                        contents[i] = list.get(position).writeItem.get(position).episodeItem.get(i).contents;
-                        episodeTitle[i] = list.get(position).writeItem.get(position).episodeItem.get(i).episodeTitle;
+                    for(int i = 0; list.get(position).writeItem.get(position) != null; i++) {
+                        contents[i] = list.get(position).writeItem.get(position).getContents();
+                        episodeTitle[i] = list.get(position).writeItem.get(position).getEpisodeTitle();
                     }
                     intent.putExtra("contents", contents);
                     intent.putExtra("episodeTitle", episodeTitle);

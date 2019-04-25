@@ -12,7 +12,7 @@ import android.view.View;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    public ArrayList<nobelItem> list = new ArrayList<>();
+    public ArrayList<NobelItem> list = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

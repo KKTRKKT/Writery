@@ -1,40 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ll_writeChoice"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:elevation="30dp"
+    android:layout_gravity="center">
 
     <android.support.design.button.MaterialButton
         android:id="@+id/modify_btn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:backgroundTint="#FFD600"
         app:rippleColor="#FF6D00"
+        android:layout_margin="15dp"
         android:text="@string/modify"
         android:textSize="40sp"
-        android:layout_margin="15dp"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/del_btn"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:cornerRadius="10dp" />
 
     <android.support.design.button.MaterialButton
         android:id="@+id/del_btn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_margin="15dp"
         android:backgroundTint="#FFD600"
         app:rippleColor="#FF6D00"
         android:text="@string/delete"
         android:textSize="40sp"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/modify_btn"
-        app:layout_constraintTop_toTopOf="parent" />
-</android.support.constraint.ConstraintLayout>
+        app:cornerRadius="10dp" />
+</LinearLayout>

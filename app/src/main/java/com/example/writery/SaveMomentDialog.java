@@ -7,10 +7,12 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class SaveMomentDialog {
+    public int code;
     public WriteContent context;
 
-    public SaveMomentDialog(WriteContent context){
+    public SaveMomentDialog(WriteContent context, int code){
         this.context = context;
+        this.code = code;
     }
     public void callFunction() {
 
@@ -33,6 +35,10 @@ public class SaveMomentDialog {
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                context.addEpisode();
+                EpisodeItem episodeItem = new EpisodeItem(code,
+                        context.title.getText().toString(), context.contents.getText().toString());
+                context.dbHandler.addEpisode(episodeItem);
                 Toast.makeText(context, "임시 저장되었습니다.", Toast.LENGTH_SHORT).show();
                 dlg.dismiss();
                 context.back();

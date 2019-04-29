@@ -1,6 +1,5 @@
 package com.example.writery;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -8,10 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    public RecyclerView.Adapter gridAdapter;
     public ArrayList<NobelItem> list = new ArrayList<>();
 
     @Override
@@ -26,19 +27,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 CreateWriteDialog createWriteDialog = new CreateWriteDialog((MainActivity)view.getContext());
                 createWriteDialog.callFunction();
+                gridAdapter.notifyDataSetChanged();
             }
         });
 
-        RecyclerView gridRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        RecyclerView.Adapter gridAdapter = new RecyclerViewAdapter(list);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-        gridRecyclerView.setLayoutManager(gridLayoutManager);
-        gridRecyclerView.setAdapter(gridAdapter);
-    }
-
-    private void goToWrite(){
-        Intent intent = new Intent(this, WriteActivity.class);
-        startActivity(intent);
+        showNobel();
+        if(gridAdapter == null)
+            adapterList();
     }
 
     @Override
@@ -48,7 +43,34 @@ public class MainActivity extends AppCompatActivity {
         //super.onBackPressed();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    //리스트 적용
+    public void adapterList(){
+        RecyclerView gridRecyclerView =  findViewById(R.id.recyclerview);
+        gridAdapter = new NobelRecyclerViewAdapter(list);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        gridRecyclerView.setLayoutManager(gridLayoutManager);
+        gridRecyclerView.setAdapter(gridAdapter);
+    }
+
+    //DB에서 목록을 불러와 리스트에 넣기
+    public void showNobel() {
+        NobelDBHandler dbHandler = new NobelDBHandler(this, null, null, 1);
+        ArrayList<NobelItem> AllList = new ArrayList<>();
+        AllList = dbHandler.showList();
+        if(!(AllList == null)){
+            list = AllList;
+        }
+    }
+
+    //DB에서 삭제
+    public void delNobel(int code){
+        NobelDBHandler dbHandler = new NobelDBHandler(this, null, null, 1);
+        boolean result = dbHandler.deleteProduct(code);
+        if(result){
+            EpisodeDBHandler episodeDBHandler = new EpisodeDBHandler(this, null, null,  1);
+            episodeDBHandler.deleteProduct(code);
+            Toast.makeText(this, "삭제 되었습니다.", Toast.LENGTH_SHORT).show();
+        }
+        showNobel();
     }
 }

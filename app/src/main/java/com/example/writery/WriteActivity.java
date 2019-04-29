@@ -14,7 +14,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class WriteActivity extends Activity {
+    EpisodeDBHandler dbHandler = new EpisodeDBHandler(this, null, null, 1);
+
     ArrayList<EpisodeItem> dataList = new ArrayList<>();
+
+    Bundle extras;
+
+    RecyclerView.Adapter adapter;
+
     MaterialButton materialButton;
     TextView titleText;
     TextView infoText;
@@ -30,33 +37,28 @@ public class WriteActivity extends Activity {
         infoText = findViewById(R.id.write_Info);
         imageView = findViewById(R.id.write_img);
 
-        Bundle extras = getIntent().getExtras();
+        extras = getIntent().getExtras();
         if(extras == null){
             return;
         }
 
-        String title = extras.getString("title");
-        String info = extras.getString("info");
-        int image = extras.getInt("image");
-        String[] contents = extras.getStringArray("contents");
-        String[] episodeTitle = extras.getStringArray("episodeTitle");
+        NobelDBHandler nobelDBHandler = new NobelDBHandler(this, null, null, 1);
+        NobelItem nobelItem = nobelDBHandler.findNobel(extras.getInt("ID"));
+//        Log.d("id", Integer.toString(extras.getInt("ID")));
 
+        titleText.setText(nobelItem.getTitle());
+        infoText.setText(nobelItem.getInfo());
 
-        for(int i = 0; i < (contents != null ? contents.length : 0); i++) {
-            dataList.add(new EpisodeItem(episodeTitle[i], contents[i]));
-        }
-
-        imageView.setImageResource(image);
-        titleText.setText(title);
-        infoText.setText(info);
-
-        RecyclerView recyclerView = findViewById(R.id.write_recyclerview);
-        RecyclerView.Adapter adapter = new writeRecyclerViewAdpater(dataList);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+        showEpisode();
+        if(adapter == null)
+            adapterList();
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 
     public void goToHome(View view) {
         onBackPressed();
@@ -64,11 +66,27 @@ public class WriteActivity extends Activity {
 
     public void gotoOnWrite(View view) {
         Intent intent = new Intent(this, WriteContent.class);
+        intent.putExtra("ID", extras.getInt("ID"));
         startActivity(intent);
     }
 
     public void Setting(View view) {
         Intent intent = new Intent(this, WriteSetting.class);
+        intent.putExtra("ID", extras.getInt("ID"));
         startActivity(intent);
+    }
+
+    public void showEpisode() {
+        ArrayList<EpisodeItem> AllList = new ArrayList<>();
+        AllList = dbHandler.showEpisode(extras.getInt("ID"));
+        dataList = AllList;
+    }
+
+    public void adapterList(){
+        RecyclerView recyclerView = findViewById(R.id.write_recyclerview);
+        adapter = new writeRecyclerViewAdpater(dataList);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
     }
 }

@@ -37,9 +37,8 @@ public class CreateWriteDialog {
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context.list.add(new NobelItem());
-                Intent intent = new Intent(context, WriteActivity.class);
-                view.getContext().startActivity(intent);
+                Intent intent = new Intent(context, WriteSetting.class);
+                context.startActivity(intent);
                 dlg.dismiss();
             }
         });

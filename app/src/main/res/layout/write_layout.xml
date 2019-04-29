@@ -27,20 +27,27 @@
                 android:backgroundTint="#304FFE"
                 android:onClick="goToHome"
                 android:text="@string/back"
+                android:textSize="16sp"
                 app:cornerRadius="10dp"
                 app:icon="@android:drawable/ic_menu_revert"
                 app:iconTint="#FFFFFF"
                 app:rippleColor="#6200EA" />
 
-            <ImageButton
+            <android.support.design.button.MaterialButton
                 android:id="@+id/write_setting_btn"
-                android:onClick="Setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginEnd="10dp"
                 android:background="#00FFFFFF"
-                android:src="@drawable/baseline_settings_black_18dp" />
+                android:backgroundTint="#00FFFFFF"
+                android:onClick="Setting"
+                android:text="@string/setting"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:icon="@drawable/baseline_settings_black_18dp"
+                app:iconTint="#000000"
+                style="?android:borderlessButtonStyle"/>
 
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>

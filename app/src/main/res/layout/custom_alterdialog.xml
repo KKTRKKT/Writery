@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="300dp"
     android:layout_height="match_parent"
     android:background="#ffffff">
 
     <TextView
         android:id="@+id/dlg_title"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:gravity="start|center"
@@ -19,13 +20,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/okButton"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/yes"
@@ -33,15 +34,18 @@
             android:textSize="16sp"
             android:background="@drawable/border"/>
 
+
+
         <Button
             android:id="@+id/cancelButton"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/no"
             android:textColor="#000000"
             android:textSize="16sp"
             android:background="@drawable/border"/>
+
     </LinearLayout>
 </LinearLayout>

@@ -1,20 +1,15 @@
 package com.example.writery;
 
-import java.util.ArrayList;
-
 public class NobelItem {
     private int ID;
     private int image;
     private String title;
     private String info;
-    ArrayList<WriteItem> writeItem;
 
-    public NobelItem(int ID, int image, String title, String info, ArrayList<WriteItem> writeItem){
-        this.ID = ID;
+    public NobelItem(int image, String title, String info){
         this.image = image;
         this.title = title;
         this.info = info;
-        this.writeItem = writeItem;
     }
 
     public NobelItem(){

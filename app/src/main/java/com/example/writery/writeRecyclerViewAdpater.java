@@ -1,8 +1,10 @@
 package com.example.writery;
+
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.button.MaterialButton;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,18 +31,16 @@ public class writeRecyclerViewAdpater extends RecyclerView.Adapter<RecyclerView.
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     Intent intent = new Intent(v.getContext(), WriteContent.class);
-                    String title = writeArrayList.get(position).getEpisodeTitle();
-                    String contents = writeArrayList.get(position).getContents();
-                    intent.putExtra("title", title);
-                    intent.putExtra("contents", contents);
+                    int id = writeArrayList.get(position).getID();
+                    intent.putExtra("ID", id);
                     v.getContext().startActivity(intent);
                 }
             });
         }
     }
 
-    private ArrayList<WriteItem> writeArrayList;
-    writeRecyclerViewAdpater(ArrayList<WriteItem> writeArrayList){
+    private ArrayList<EpisodeItem> writeArrayList;
+    writeRecyclerViewAdpater(ArrayList<EpisodeItem> writeArrayList){
         this.writeArrayList = writeArrayList;
     }
 
@@ -54,6 +54,7 @@ public class writeRecyclerViewAdpater extends RecyclerView.Adapter<RecyclerView.
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         ViewHolder viewHolder1 = (ViewHolder)viewHolder;
+        Log.d("write", Integer.toString(i));
         viewHolder1.title.setText(writeArrayList.get(i).getEpisodeTitle());
     }
 

@@ -59,7 +59,7 @@
             android:layout_gravity="center">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/write_setting_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
@@ -68,9 +68,10 @@
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/imageView"
-                android:layout_alignBottom="@+id/imageView"
+                android:layout_alignEnd="@+id/write_setting_img"
+                android:layout_alignBottom="@+id/write_setting_img"
                 android:background="#00111111"
+                android:onClick="gotoAlbum"
                 android:paddingStart="30dp"
                 android:paddingTop="30dp"
                 android:src="@android:drawable/ic_menu_camera" />
@@ -90,7 +91,7 @@
             android:background="#00111111" />
 
         <EditText
-            android:id="@+id/cardview_title"
+            android:id="@+id/write_setting_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -98,8 +99,10 @@
             android:layout_marginEnd="50dp"
             android:backgroundTint="@android:color/darker_gray"
             android:gravity="center|top"
+            android:text=""
             android:hint="@string/title"
             android:maxLines="1"
+            android:maxLength="10"
             android:paddingTop="15dp"
             android:paddingBottom="10dp"
             android:textSize="24sp" />
@@ -110,7 +113,8 @@
             android:background="#00111111" />
 
         <EditText
-            android:id="@+id/cardview_Info"
+            android:text=""
+            android:id="@+id/write_setting_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"

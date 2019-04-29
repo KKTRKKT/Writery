@@ -31,7 +31,11 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".WriteContent"
             android:screenOrientation="portrait"/>
-        <activity android:name=".WriteSetting" />
+        <activity android:name=".WriteSetting"
+            />
     </application>
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 </manifest>

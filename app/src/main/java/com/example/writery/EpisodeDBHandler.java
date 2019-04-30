@@ -51,23 +51,62 @@ public class EpisodeDBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void update(int id, String title, String content){
+        SQLiteDatabase db = getWritableDatabase();
+
+        String sql = "UPDATE "+ TABLE_PEODUCT + " SET "+ COL_EPISODETITLE + "='"+ title + "'," +
+                ""+ COL_CONTENTS + "='"+ content + "' WHERE " + COL_ID + "=" + id;
+
+        db.execSQL(sql);
+
+        db.close();
+    }
+
     public ArrayList<EpisodeItem> showEpisode(int code){
+            String query = "SELECT * FROM " + TABLE_PEODUCT + " WHERE "+
+                    COL_CODE + " = \"" + code + "\"";
+
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            Cursor cursor = db.rawQuery(query, null);
+
+            ArrayList<EpisodeItem> product = new ArrayList<>();
+
+            while (cursor.moveToNext()) {
+                EpisodeItem episodeItem = new EpisodeItem();
+                episodeItem.setID(Integer.parseInt(cursor.getString(0)));
+                episodeItem.setCode(Integer.parseInt(cursor.getString(1)));
+                episodeItem.setEpisodeTitle(cursor.getString(2));
+                episodeItem.setContents(cursor.getString(3));
+//                Log.d("episdeitem", Integer.toString(episodeItem.getID()));
+//                Log.d("episdeitem", Integer.toString(episodeItem.getCode()));
+//                Log.d("episdeitem", episodeItem.getContents());
+//                Log.d("episdeitem", episodeItem.getEpisodeTitle());
+                product.add(episodeItem);
+//                Log.d("episdeite", Integer.toString(product.get(0).getID()));
+            }
+        cursor.close();
+        db.close();
+        return product;
+    }
+
+    public EpisodeItem findEpisode(int id){
         String query = "SELECT * FROM " + TABLE_PEODUCT + " WHERE "+
-                COL_CODE + " = \"" + code + "\"";
+                COL_ID + " = \"" + id + "\"";
 
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor cursor = db.rawQuery(query, null);
 
-        ArrayList<EpisodeItem> product = new ArrayList<>();
+        EpisodeItem product = new EpisodeItem();
 
-        while(cursor.moveToNext()) {
-            EpisodeItem episodeItem = new EpisodeItem();
-            episodeItem.setID(Integer.parseInt(cursor.getString(0)));
-            episodeItem.setCode(Integer.parseInt(cursor.getString(1)));
-            episodeItem.setEpisodeTitle(cursor.getString(2));
-            episodeItem.setContents(cursor.getString(3));
-            product.add(episodeItem);
+        if(cursor.moveToFirst()) {
+            product.setID(Integer.parseInt(cursor.getString(0)));
+            product.setCode(Integer.parseInt(cursor.getString(1)));
+            product.setEpisodeTitle(cursor.getString(2));
+            product.setContents(cursor.getString(3));
+        }else{
+            product = null;
         }
 
         cursor.close();
@@ -75,28 +114,24 @@ public class EpisodeDBHandler extends SQLiteOpenHelper {
         return product;
     }
 
-    public ArrayList<EpisodeItem> showEpisode(int id){
-        String query = "SELECT * FROM " + TABLE_PEODUCT + " WHERE "+
-                COL_CODE + " = \"" + code + "\"";
+    public int getID(){
+        String query = "SELECT * FROM " + TABLE_PEODUCT ;
 
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor cursor = db.rawQuery(query, null);
 
-        ArrayList<EpisodeItem> product = new ArrayList<>();
+        int ID;
 
-        while(cursor.moveToNext()) {
-            EpisodeItem episodeItem = new EpisodeItem();
-            episodeItem.setID(Integer.parseInt(cursor.getString(0)));
-            episodeItem.setCode(Integer.parseInt(cursor.getString(1)));
-            episodeItem.setEpisodeTitle(cursor.getString(2));
-            episodeItem.setContents(cursor.getString(3));
-            product.add(episodeItem);
+        if(cursor.moveToLast()) {
+            ID = Integer.parseInt(cursor.getString(0));
+        }else{
+            ID = 0;
         }
 
         cursor.close();
         db.close();
-        return product;
+        return ID;
     }
 
     public void deleteProduct(int code){

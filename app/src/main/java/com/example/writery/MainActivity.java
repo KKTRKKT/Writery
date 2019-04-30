@@ -27,13 +27,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 CreateWriteDialog createWriteDialog = new CreateWriteDialog((MainActivity)view.getContext());
                 createWriteDialog.callFunction();
-                gridAdapter.notifyDataSetChanged();
+                showNobel();
+                adapterList();
             }
         });
 
         showNobel();
-        if(gridAdapter == null)
-            adapterList();
+        adapterList();
     }
 
     @Override

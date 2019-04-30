@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 
 
-public class writeRecyclerViewAdpater extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class writeRecyclerViewAdpater extends RecyclerView.Adapter<writeRecyclerViewAdpater.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder{
         TextView title;
@@ -22,8 +22,8 @@ public class writeRecyclerViewAdpater extends RecyclerView.Adapter<RecyclerView.
 
         ViewHolder(View view){
             super(view);
-            title = view.findViewById(R.id.write_title);
-            button = view.findViewById(R.id.modify_button);
+            title = view.findViewById(R.id.write_cardview_title);
+            button = view.findViewById(R.id.write_card_modify_button);
 
             //수정 버튼 클릭 시 WriteContent 클래스에 제목과 내용 전달
             button.setOnClickListener(new View.OnClickListener(){
@@ -33,6 +33,7 @@ public class writeRecyclerViewAdpater extends RecyclerView.Adapter<RecyclerView.
                     Intent intent = new Intent(v.getContext(), WriteContent.class);
                     int id = writeArrayList.get(position).getID();
                     intent.putExtra("ID", id);
+                    intent.putExtra("code", code);
                     v.getContext().startActivity(intent);
                 }
             });
@@ -40,8 +41,10 @@ public class writeRecyclerViewAdpater extends RecyclerView.Adapter<RecyclerView.
     }
 
     private ArrayList<EpisodeItem> writeArrayList;
-    writeRecyclerViewAdpater(ArrayList<EpisodeItem> writeArrayList){
+    private int code;
+    writeRecyclerViewAdpater(ArrayList<EpisodeItem> writeArrayList, int code){
         this.writeArrayList = writeArrayList;
+        this.code = code;
     }
 
     @NonNull
@@ -52,10 +55,9 @@ public class writeRecyclerViewAdpater extends RecyclerView.Adapter<RecyclerView.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        ViewHolder viewHolder1 = (ViewHolder)viewHolder;
-        Log.d("write", Integer.toString(i));
-        viewHolder1.title.setText(writeArrayList.get(i).getEpisodeTitle());
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+        Log.d("epiosodeID", Integer.toString(i));
+        viewHolder.title.setText(writeArrayList.get(i).getEpisodeTitle());
     }
 
     @Override

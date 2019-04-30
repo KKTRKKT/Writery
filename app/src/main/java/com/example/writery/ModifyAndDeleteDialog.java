@@ -52,6 +52,7 @@ public class ModifyAndDeleteDialog {
             public void onClick(View view) {
                 context.delNobel(position);
                 context.showNobel();
+                context.adapterList();
                 dlg.dismiss();
             }
         });

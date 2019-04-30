@@ -1,18 +1,21 @@
 package com.example.writery;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
 public class SaveMomentDialog {
-    public int code;
+    private int id;
+    private int code;
     public WriteContent context;
 
-    public SaveMomentDialog(WriteContent context, int code){
+    public SaveMomentDialog(WriteContent context, int code, int id){
         this.context = context;
         this.code = code;
+        this.id = id;
     }
     public void callFunction() {
 
@@ -35,20 +38,25 @@ public class SaveMomentDialog {
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                context.addEpisode();
-                EpisodeItem episodeItem = new EpisodeItem(code,
-                        context.title.getText().toString(), context.contents.getText().toString());
-                context.dbHandler.addEpisode(episodeItem);
-                Toast.makeText(context, "임시 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                if(!(context.title.getText().toString().equals(context.dbHandler.
+                        findEpisode(id).getEpisodeTitle()) && context.contents.getText().toString().equals(context
+                        .dbHandler.findEpisode(id).getContents()))){
+                    context.save();
+                    Toast.makeText(context, "임시 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                }
+                Intent i = new Intent(context, WriteActivity.class);
+                i.putExtra("ID", code);
                 dlg.dismiss();
-                context.back();
+                context.startActivity(i);
             }
         });
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent i = new Intent(context, WriteActivity.class);
+                i.putExtra("ID", code);
                 dlg.dismiss();
-                context.back();
+                context.startActivity(i);
             }
         });
     }

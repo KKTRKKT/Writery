@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -37,21 +38,28 @@ public class WriteActivity extends Activity {
         infoText = findViewById(R.id.write_Info);
         imageView = findViewById(R.id.write_img);
 
+
         extras = getIntent().getExtras();
         if(extras == null){
-            return;
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
 
-        NobelDBHandler nobelDBHandler = new NobelDBHandler(this, null, null, 1);
-        NobelItem nobelItem = nobelDBHandler.findNobel(extras.getInt("ID"));
+        try {
+            NobelDBHandler nobelDBHandler = new NobelDBHandler(this, null, null, 1);
+            NobelItem nobelItem = nobelDBHandler.findNobel(extras.getInt("ID"));
 //        Log.d("id", Integer.toString(extras.getInt("ID")));
 
-        titleText.setText(nobelItem.getTitle());
-        infoText.setText(nobelItem.getInfo());
+            titleText.setText(nobelItem.getTitle());
+            infoText.setText(nobelItem.getInfo());
 
-        showEpisode();
-        if(adapter == null)
+            showEpisode();
             adapterList();
+        }catch (Exception e){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            Toast.makeText(this, "다시 시도해 주세요", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -65,8 +73,11 @@ public class WriteActivity extends Activity {
     }
 
     public void gotoOnWrite(View view) {
+        EpisodeItem episodeItem = new EpisodeItem(extras.getInt("ID"));
+        dbHandler.addEpisode(episodeItem);
         Intent intent = new Intent(this, WriteContent.class);
-        intent.putExtra("ID", extras.getInt("ID"));
+        intent.putExtra("code", extras.getInt("ID"));
+        intent.putExtra("ID", dbHandler.getID());
         startActivity(intent);
     }
 
@@ -84,7 +95,7 @@ public class WriteActivity extends Activity {
 
     public void adapterList(){
         RecyclerView recyclerView = findViewById(R.id.write_recyclerview);
-        adapter = new writeRecyclerViewAdpater(dataList);
+        adapter = new writeRecyclerViewAdpater(dataList, extras.getInt("ID"));
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);

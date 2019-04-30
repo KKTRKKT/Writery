@@ -12,6 +12,10 @@ public class EpisodeItem {
         this.contents = contents;
     }
 
+    public EpisodeItem(int code) {
+        this.code = code;
+    }
+
     public EpisodeItem(){
     }
 

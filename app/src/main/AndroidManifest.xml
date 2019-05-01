@@ -32,7 +32,9 @@
         <activity android:name=".WriteContent"
             android:screenOrientation="portrait"/>
         <activity android:name=".WriteSetting"
-            />
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ReadActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
     <uses-permission android:name="android.permission.CAMERA" />

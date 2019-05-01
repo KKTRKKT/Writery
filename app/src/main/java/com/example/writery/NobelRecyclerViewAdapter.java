@@ -3,7 +3,6 @@ package com.example.writery;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +32,7 @@ public class NobelRecyclerViewAdapter extends RecyclerView.Adapter<NobelRecycler
                     MainActivity mainActivity = (MainActivity) view.getContext();
                     ModifyAndDeleteDialog modifyAndDeleteDialog = new ModifyAndDeleteDialog(mainActivity, id);
                     modifyAndDeleteDialog.callFunction();
+                    Toast.makeText(view.getContext(), list.get(position).getTitle(), Toast.LENGTH_SHORT).show();
                     return true;
                 }
             });

@@ -18,20 +18,36 @@ public class writeRecyclerViewAdpater extends RecyclerView.Adapter<writeRecycler
 
     class ViewHolder extends RecyclerView.ViewHolder{
         TextView title;
-        MaterialButton button;
+        MaterialButton Modifybutton;
 
         ViewHolder(View view){
             super(view);
             title = view.findViewById(R.id.write_cardview_title);
-            button = view.findViewById(R.id.write_card_modify_button);
+            Modifybutton = view.findViewById(R.id.write_card_modify_button);
 
             //수정 버튼 클릭 시 WriteContent 클래스에 제목과 내용 전달
-            button.setOnClickListener(new View.OnClickListener(){
+            Modifybutton.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     Intent intent = new Intent(v.getContext(), WriteContent.class);
                     int id = writeArrayList.get(position).getID();
+                    Log.d("ID", Integer.toString(id));
+                    Log.d("CODE", Integer.toString(code));
+                    intent.putExtra("ID", id);
+                    intent.putExtra("code", code);
+                    v.getContext().startActivity(intent);
+                }
+            });
+            //ReadActivity에 제목과 내용 전달
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    Intent intent = new Intent(v.getContext(), ReadActivity.class);
+                    int id = writeArrayList.get(position).getID();
+                    Log.d("ID", Integer.toString(id));
+                    Log.d("CODE", Integer.toString(code));
                     intent.putExtra("ID", id);
                     intent.putExtra("code", code);
                     v.getContext().startActivity(intent);

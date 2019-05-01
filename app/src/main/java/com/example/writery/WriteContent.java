@@ -55,6 +55,7 @@ public class WriteContent extends Activity {
 
     public void erase(View view) {
         contents.setText("");
+        Toast.makeText(this, "내용을 지웠습니다.", Toast.LENGTH_SHORT).show();
     }
 
     public void savebtn(View view) {
@@ -69,5 +70,12 @@ public class WriteContent extends Activity {
 //        episodeItem = dbHandler.findEpisode(ID);
 //        Log.d("episode", episodeItem.getEpisodeTitle());
 //        episodeItemArrayList = dbHandler.showEpisode(code);
+    }
+
+    public void preView(View view) {
+        Intent intent = new Intent(this, ReadActivity.class);
+        intent.putExtra("contents", contents.getText().toString());
+        intent.putExtra("title", title.getText().toString());
+        startActivity(intent);
     }
 }

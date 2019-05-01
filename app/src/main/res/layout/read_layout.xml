@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/read_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border"
+        android:gravity="center"
+        android:hint="@string/title"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textSize="20sp" />
+
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/read_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="15dp">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_margin="15dp" />
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

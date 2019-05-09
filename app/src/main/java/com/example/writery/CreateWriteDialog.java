@@ -39,6 +39,7 @@ public class CreateWriteDialog {
             public void onClick(View view) {
                 Intent intent = new Intent(context, WriteSetting.class);
                 context.startActivity(intent);
+                context.overridePendingTransition(R.anim.anim_static, R.anim.anim_static);
                 dlg.dismiss();
             }
         });

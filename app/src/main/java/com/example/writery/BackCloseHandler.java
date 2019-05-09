@@ -29,6 +29,9 @@ public class BackCloseHandler {
             activity.finish();
             android.os.Process.killProcess(android.os.Process.myPid());
         }
+        else{
+            backKeyClickTime = System.currentTimeMillis();
+        }
     }
 
     public void showToast() {

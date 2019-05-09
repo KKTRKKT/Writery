@@ -38,6 +38,8 @@ public class WriteContent extends Activity {
         if(extras == null){
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.anim_static, R.anim.anim_static);
+
         }
 
         code = extras.getInt("code");
@@ -51,7 +53,6 @@ public class WriteContent extends Activity {
         SaveMomentDialog customDialog = new SaveMomentDialog(WriteContent.this, code, ID);
         customDialog.callFunction();
     }
-
 
     public void erase(View view) {
         contents.setText("");
@@ -77,5 +78,7 @@ public class WriteContent extends Activity {
         intent.putExtra("contents", contents.getText().toString());
         intent.putExtra("title", title.getText().toString());
         startActivity(intent);
+        overridePendingTransition(R.anim.anim_static, R.anim.anim_static);
+
     }
 }

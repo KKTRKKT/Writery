@@ -37,6 +37,7 @@ public class ReadActivity extends Activity {
         extras = getIntent().getExtras();
         if(extras == null){
             Intent intent = new Intent(this, MainActivity.class);
+            overridePendingTransition(R.anim.anim_static, R.anim.anim_static);
             startActivity(intent);
         }
 
@@ -67,6 +68,7 @@ public class ReadActivity extends Activity {
         dbHandler = new EpisodeDBHandler(this, null, null, 1);
         EpisodeItem episodeItem;
         episodeItem = dbHandler.findEpisode(ID);
+
         if(episodeItem.getContents().length() > LEN){
             String page = episodeItem.getContents();
             for(int i = 0; i < page.length()/LEN+1; i++){
@@ -77,7 +79,6 @@ public class ReadActivity extends Activity {
                     sub = page.substring((LEN * i), ((LEN+1) * (i + 1)) - (i));
                 }
                 list.add(new ReadItem(sub));
-
             }
         }else{
             list.add(new ReadItem(episodeItem.getContents()));
@@ -107,5 +108,11 @@ public class ReadActivity extends Activity {
         LinearLayoutManager linearLayout = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayout);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.anim_static, R.anim.anim_static);
     }
 }

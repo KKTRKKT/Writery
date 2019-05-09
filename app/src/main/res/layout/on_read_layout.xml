@@ -6,12 +6,12 @@
         <TextView
             android:id="@+id/on_read_contents"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="25"
             android:padding="15dp"
-            android:layout_margin="20dp"
+            android:layout_margin="10dp"
             android:gravity="top|start"
             android:textSize="20sp"
             android:background="@android:color/white"
-            android:maxLength="250"
-            android:hint="@string/contents"/>
+            android:maxLength="250"/>
     </android.support.v7.widget.CardView>

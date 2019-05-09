@@ -44,6 +44,7 @@ public class ModifyAndDeleteDialog {
                 Log.d("ID", Integer.toString(position));
                 intent.putExtra("ID", position);
                 context.startActivity(intent);
+                context.overridePendingTransition(R.anim.anim_static, R.anim.anim_static);
                 dlg.dismiss();
             }
         });

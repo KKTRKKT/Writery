@@ -2,6 +2,8 @@ package com.example.writery;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.button.MaterialButton;
@@ -43,6 +45,7 @@ public class WriteActivity extends Activity {
         if(extras == null){
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.anim_static, R.anim.anim_static);
         }
 
         try {
@@ -52,12 +55,18 @@ public class WriteActivity extends Activity {
 
             titleText.setText(nobelItem.getTitle());
             infoText.setText(nobelItem.getInfo());
+            try {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(nobelItem.getImage(), 0, nobelItem.getImage().length);
+                imageView.setImageBitmap(bitmap);
+            }catch (Exception e){
+            }
 
             showEpisode();
             adapterList();
         }catch (Exception e){
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.anim_static, R.anim.anim_static);
             Toast.makeText(this, "다시 시도해 주세요", Toast.LENGTH_SHORT).show();
         }
     }
@@ -66,6 +75,7 @@ public class WriteActivity extends Activity {
     public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.anim_static, R.anim.anim_static);
     }
 
     public void goToHome(View view) {
@@ -79,12 +89,15 @@ public class WriteActivity extends Activity {
         intent.putExtra("code", extras.getInt("ID"));
         intent.putExtra("ID", dbHandler.getID());
         startActivity(intent);
+        overridePendingTransition(R.anim.anim_static, R.anim.anim_static);
     }
 
     public void Setting(View view) {
         Intent intent = new Intent(this, WriteSetting.class);
         intent.putExtra("ID", extras.getInt("ID"));
         startActivity(intent);
+        overridePendingTransition(R.anim.anim_static, R.anim.anim_static);
+
     }
 
     public void showEpisode() {

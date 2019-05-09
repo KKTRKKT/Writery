@@ -2,28 +2,30 @@ package com.example.writery;
 
 public class NobelItem {
     private int ID;
-    private int image;
+    private byte[] image;
     private String title;
     private String info;
 
-    public NobelItem(int image, String title, String info){
+    public NobelItem(byte[] image, String title, String info) {
         this.image = image;
         this.title = title;
         this.info = info;
     }
 
-    public NobelItem(){
-        this.image = R.drawable.front;
+    public NobelItem() {
     }
 
-    public int getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 
+    public String getTitles() {
+        return title;
+    }
     public String getTitle() {
         return title;
     }
@@ -48,3 +50,4 @@ public class NobelItem {
         this.ID = ID;
     }
 }
+

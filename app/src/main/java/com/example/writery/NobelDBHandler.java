@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
 
 import java.util.ArrayList;
 
@@ -29,7 +30,7 @@ public class NobelDBHandler extends SQLiteOpenHelper {
         String CREATE_PRODUCTS_TABLE = "CREATE TABLE " +
                 TABLE_PEODUCT + "("
                 + COL_ID + " INTEGER PRIMARY KEY," + COL_COVER
-                + " INTEGER," + COL_TITLE + " TEXT," + COL_INFO + " TEXT" + ")";
+                + " BLOB," + COL_TITLE + " TEXT," + COL_INFO + " TEXT" + ")";
         db.execSQL(CREATE_PRODUCTS_TABLE);
     }
 
@@ -41,9 +42,10 @@ public class NobelDBHandler extends SQLiteOpenHelper {
 
     public void addWrite(NobelItem product){
         ContentValues values = new ContentValues();
-        values.put(COL_COVER, product.getImage());
-        values.put(COL_TITLE, product.getTitle());
+//        values.put(COL_COVER, product.getImage());
+        values.put(COL_TITLE, product.getTitles());
         values.put(COL_INFO, product.getInfo());
+        values.put(COL_COVER, product.getImage());
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -52,10 +54,31 @@ public class NobelDBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void update(int code, String title, String info){
+    public void update(int code, String title, String info, byte[] cover){
+        SQLiteDatabase db = getWritableDatabase();
+//
+//        String sql = "UPDATE "+ TABLE_PEODUCT + " SET " + COL_COVER + "='?'" +
+//                "," + COL_TITLE + "='"+ title + "',"+ COL_INFO + "='"+ info +
+//                "' WHERE " + COL_ID + "=" + code;
+
+//        String sql = "UPDATE "+ TABLE_PEODUCT + " SET " + COL_COVER + "=(?)" +
+//                ", " + COL_TITLE + "=(?), "+ COL_INFO + "=(?)" +
+//                " WHERE " + COL_ID + "=(?);";
+
+        SQLiteStatement p = db.compileStatement("update write set cover =(?), title =(?), info=(?) where _id = (?);");
+
+        p.bindBlob(1, cover);
+        p.bindString(2, title);
+        p.bindString(3, info);
+        p.bindLong(4, code);
+        p.execute();
+
+        db.close();
+    }
+    public void update(int code, byte img){
         SQLiteDatabase db = getWritableDatabase();
 
-        String sql = "UPDATE "+ TABLE_PEODUCT + " SET "+ COL_TITLE + "='"+ title + "',"+ COL_INFO + "='"+ info + "' WHERE " + COL_ID + "=" + code;
+        String sql = "UPDATE "+ TABLE_PEODUCT + " SET "+ COL_COVER + "='"+ img + "' WHERE " + COL_ID + "=" + code;
 
         db.execSQL(sql);
 
@@ -71,10 +94,15 @@ public class NobelDBHandler extends SQLiteOpenHelper {
 
         ArrayList<NobelItem> product = new ArrayList<>();
 
+//        Bitmap bitmap = ((BitmapDrawable)).getBitmap();
+//        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+//        byte[] data = stream.toByteArray();
+
         while(cursor.moveToNext()) {
             NobelItem nobelItem = new NobelItem();
             nobelItem.setID(Integer.parseInt(cursor.getString(0)));
-            nobelItem.setImage(Integer.parseInt(cursor.getString(1)));
+            nobelItem.setImage(cursor.getBlob(1));
             nobelItem.setTitle(cursor.getString(2));
             nobelItem.setInfo(cursor.getString(3));
             product.add(nobelItem);
@@ -118,7 +146,7 @@ public class NobelDBHandler extends SQLiteOpenHelper {
         if(cursor.moveToFirst()){
             cursor.moveToFirst();
             product.setID(Integer.parseInt(cursor.getString(0)));
-            product.setImage(Integer.parseInt(cursor.getString(1)));
+            product.setImage(cursor.getBlob(1));
             product.setTitle(cursor.getString(2));
             product.setInfo(cursor.getString(3));
 

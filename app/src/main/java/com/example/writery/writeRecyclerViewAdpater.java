@@ -50,6 +50,7 @@ public class writeRecyclerViewAdpater extends RecyclerView.Adapter<writeRecycler
                     Log.d("CODE", Integer.toString(code));
                     intent.putExtra("ID", id);
                     intent.putExtra("code", code);
+
                     v.getContext().startActivity(intent);
                 }
             });

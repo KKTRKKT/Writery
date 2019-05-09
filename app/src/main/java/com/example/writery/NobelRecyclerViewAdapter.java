@@ -1,6 +1,7 @@
 package com.example.writery;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -59,7 +60,12 @@ public class NobelRecyclerViewAdapter extends RecyclerView.Adapter<NobelRecycler
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.image.setImageResource(list.get(position).getImage());
+        try {
+            byte[] img = list.get(position).getImage();
+            holder.image.setImageBitmap(BitmapFactory.decodeByteArray(img, 0, img.length));
+        }catch (Exception e){
+            holder.image.setImageResource(R.drawable.front);
+        }
     }
 
     @Override

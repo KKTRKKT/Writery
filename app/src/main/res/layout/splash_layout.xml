@@ -8,13 +8,13 @@
     android:background="#FFF8E1">
 
     <ImageView
+        android:id="@+id/splash_img"
         android:backgroundTint="#000000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="ContentDescription" />
 
 </android.support.constraint.ConstraintLayout>

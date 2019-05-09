@@ -12,6 +12,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    BackCloseHandler backCloseHandler;
+
     public RecyclerView.Adapter gridAdapter;
     public ArrayList<NobelItem> list = new ArrayList<>();
 
@@ -21,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         FloatingActionButton fad = findViewById(R.id.write_fad);
+
+        backCloseHandler = new BackCloseHandler(this);
 
         fad.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,9 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        BackCloseHandler backCloseHandler = new BackCloseHandler(this);
-        backCloseHandler.onBackPressed();
-        //super.onBackPressed();
+       backCloseHandler.onBackPressed();
+//        super.onBackPressed();
     }
 
     //리스트 적용

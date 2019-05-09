@@ -48,6 +48,8 @@ public class SaveMomentDialog {
                 i.putExtra("ID", code);
                 dlg.dismiss();
                 context.startActivity(i);
+                context.overridePendingTransition(R.anim.anim_static, R.anim.anim_static);
+
             }
         });
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +59,8 @@ public class SaveMomentDialog {
                 i.putExtra("ID", code);
                 dlg.dismiss();
                 context.startActivity(i);
+                context.overridePendingTransition(R.anim.anim_static, R.anim.anim_static);
+
             }
         });
     }
